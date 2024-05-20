@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+:root {
+	--header--height: 50px;
+	--footer--height: 50px;
+}
+
+body, html {
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+
+
+header {
+	position: fixed;
+	top: 0;
+	background-color: #333333;
+	color: #FFFFFF;
+	height: var(--header--height);
+	width: 100%;
+	line-height: 50px;
+	font-size: 30px;
+}
+
+.contents {
+	margin-top: var(--header--height);
+	--contents--min--height: calc(100% - var(--header--height) - var(--footer--height));
+	min-height: var(--contents--min--height);
+}
+
+
+footer {
+	height: var(--footer--height); 	
+	line-height: 50px;
+	text-align: center;
+	margin-top: 50px;
+}

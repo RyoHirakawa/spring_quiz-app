@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- th:replaceを使用して、 <head>用のフラグメントを読込みます -->
+
+<head th:replace="fragments/head :: head_fragment(title = 'サンプルアプリケーション', scripts = ~{::script}, links = ~{::link})">
+
+	<!-- 当画面で使用するjavascript、cssをフラグメントに渡します -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/index.css}" />
+	<script type="text/javascript" th:src="@{/scripts/index.js}"></script>
+
+	<head>
+	</head>
+
+<body>
+	<div th:replace="fragments/header :: header_fragment"></div>
+
+
+	<div class="contents">
+		<h1 th:text="${categoryName} + 'の問題一覧'"></h1>
+
+		<table>
+			<thead>
+				<tr>
+					<th>問題文</th>
+					<th>正解</th>
+					<th>ダミー選択肢</th>
+					<th>解説</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="problem : ${problems}">
+					<td th:text="${problem.question}"></td>
+					<td th:text="${problem.choices[0]}"></td>
+					<td>
+						<ul>
+							<li th:text="${problem.choices[1]}"></li>
+							<li th:text="${problem.choices[2]}"></li>
+							<li th:text="${problem.choices[3]}"></li>
+						</ul>
+					</td>
+					<td th:text="${problem.annotation}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+
+	<div th:replace="fragments/footer :: footer_fragment"></div>
+</body>
+
+</html>

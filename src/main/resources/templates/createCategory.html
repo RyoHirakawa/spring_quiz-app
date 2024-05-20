@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- th:replaceを使用して、 <head>用のフラグメントを読込みます -->
+
+<head th:replace="fragments/head :: head_fragment(title = 'サンプルアプリケーション', scripts = ~{::script}, links = ~{::link})">
+
+	<!-- 当画面で使用するjavascript、cssをフラグメントに渡します -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/index.css}" />
+	<script type="text/javascript" th:src="@{/scripts/index.js}"></script>
+
+	<head>
+	</head>
+
+<body>
+	<div th:replace="fragments/header :: header_fragment"></div>
+	<div class="contents">
+		<h1>カテゴリ（資格名）一覧</h1>
+		<form th:action="@{/saveCategory}" method="post" th:object="${category}">
+			<p>資格名：<input type="text" th:field="*{name}">
+				<button type="submit">Create</button>
+			</p>
+		</form>
+		<div class="category-table">
+			<table>
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- Categoryを反復処理して表示 -->
+					<tr th:each="category : ${categories}">
+						<td th:text="${category.id}"></td>
+						<td th:text="${category.name}"></td>
+						<td>
+							<a th:href="@{/category/{id}/createProblem(id=${category.id})}">問題作成</a>							
+							<a th:href="@{/category/{id}/problems(id=${category.id})}">問題一覧</a>
+							<a th:href="@{/category/{id}/test(id=${category.id})}">テスト</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+
+	<div th:replace="fragments/footer :: footer_fragment"></div>
+
+</body>
+
+</html>

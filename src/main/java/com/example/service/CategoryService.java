@@ -1,0 +1,66 @@
+package com.example.service;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.model.Category;
+import com.example.model.Problem;
+import com.example.repository.CategoryRepository;
+import com.example.repository.ProblemRepository;
+
+import jakarta.persistence.EntityNotFoundException;
+
+@Service
+public class CategoryService {
+	@Autowired
+	private CategoryRepository categoryRepository;
+
+	@Autowired
+	private ProblemRepository problemRepository;
+
+	public void save(Category category) {
+		categoryRepository.save(category);
+	}
+
+	public java.util.List<Category> getAll() {
+		return categoryRepository.findAll();
+	}
+
+	public void sayHello() {
+		System.out.println("say Hello");
+	}
+
+	public Category getCategoryById(Long i) {
+		Optional<Category> categoryOptional = categoryRepository.findById(i);
+		return categoryOptional.orElseThrow(() -> new EntityNotFoundException("Category not found with id: " + i));
+	}
+
+	//n個のランダムな問題を返す
+	public java.util.List<Problem> getRandomProblems(Long categoryId, int numberOfProblems) {
+		System.out.println("getRandomProblemが呼び出されました");
+		Category category = getCategoryById(categoryId);
+		java.util.List<Problem> allProblems = problemRepository.findByCategory(category);
+		System.out.println();
+		// 問題が n 個未満の場合は全ての問題を返す
+		if (allProblems.size() <= numberOfProblems) {
+			return allProblems;
+		}
+
+		// 問題をランダムに選択するためにリストをシャッフル
+		Collections.shuffle(allProblems);
+
+		// ランダムに選択した n 個の問題を格納するリスト
+		java.util.List<Problem> randomProblems = new ArrayList<>();
+
+		// ランダムに選択した n 個の問題を取得
+		for (int i = 0; i < numberOfProblems; i++) {
+			randomProblems.add(allProblems.get(i));
+		}
+
+		return randomProblems;
+	}
+}

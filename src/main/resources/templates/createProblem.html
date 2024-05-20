@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- th:replaceを使用して、 <head>用のフラグメントを読込みます -->
+
+<head th:replace="fragments/head :: head_fragment(title = 'サンプルアプリケーション', scripts = ~{::script}, links = ~{::link})">
+
+	<!-- 当画面で使用するjavascript、cssをフラグメントに渡します -->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/index.css}" />
+	<script type="text/javascript" th:src="@{/scripts/index.js}"></script>
+
+	<head>
+	</head>
+
+<body>
+	<div th:replace="fragments/header :: header_fragment"></div>
+	
+	<div class="contents">
+		<h1>問題を作成</h1>
+		<form th:action="@{/saveProblem}" th:object="${problem}" method="post">
+			<input type="hidden" th:field="*{id}"/>
+			
+			<div>
+				<label for="question">問題文:</label><br/>
+				<textarea id="question" th:field="*{question}" rows="8" cols="50"></textarea>
+			</div>
+			
+			<div>
+				<label>選択肢:</label><br/>
+				<label for="correctChoice">正解の選択肢:</label><br/>
+				<textarea id="correctChoice" type="text" th:field="*{choices[0]}" rows="2" cols="30"></textarea><br/>
+				
+				<label for="wrongChoice1">不正解の選択肢:</label><br/>
+				<textarea id="wrongChoice1" type="text" th:field="*{choices[1]}" placeholder="ダミー選択肢1" rows="2" cols="30"></textarea><br/>
+				<textarea id="wrongChoice2" type="text" th:field="*{choices[2]}" placeholder="ダミー選択肢2" rows="2" cols="30"></textarea><br/>
+				<textarea id="wrongChoice3" type="text" th:field="*{choices[3]}" placeholder="ダミー選択肢3" rows="2" cols="30"></textarea><br/>
+			</div>
+			
+			<div>
+				<label for="annotation">解説:</label><br/>
+				<textarea id="annotation" th:field="*{annotation}" rows="4" cols="50"></textarea>
+			</div>
+			
+			<div>
+				<label for="category">カテゴリ:</label><br/>
+				<input type="hidden" th:field="*{category.id}"/>
+				<input id="category" type="text" th:field="*{category.name}" readonly/>
+			</div>
+			
+			<div>
+				<button type="submit">作成</button>
+			</div>
+		</form>
+	</div>
+
+
+	<div th:replace="fragments/footer :: footer_fragment"></div>
+</body>
+
+</html>
