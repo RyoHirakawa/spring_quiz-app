@@ -20,13 +20,19 @@
 			margin-bottom: 10px;
 		}
 
-		.question {
+		.problemIndex {
+			font-size: 30px;
 			font-weight: bold;
+		}
+
+		.question {
+			font-size: 25px;
 		}
 
 		.choices {
 			list-style-type: none;
 			padding-left: 0;
+			font-size: 20px;
 		}
 
 		.correct {
@@ -51,10 +57,11 @@
 		<h1 th:text="${category.name} + 'から出題です'"></h1>
 
 		<div th:each="problem, problemStat : ${problemList}" class="problem">
+			<div class="problemIndex" th:text="'第' + ${problemStat.index} + '問'"></div>
 			<div class="question" th:text="${problem.question}"></div>
-			<ul class="choices">
+			<ul class="mt-3 choices">
 				<!-- Loop through the choices and display each one -->
-				<li th:each="choice, choiceStat : ${problem.choices}" th:text="${choice}"
+				<li class="mt-1" th:each="choice, choiceStat : ${problem.choices}" th:text="${choiceStat.index} + '. ' + ${choice}"
 					th:data-index="${choiceStat.index}"></li>
 			</ul>
 			<div class="explanation" th:text="${problem.annotation}"></div>
