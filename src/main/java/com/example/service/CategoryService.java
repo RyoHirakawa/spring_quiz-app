@@ -34,10 +34,21 @@ public class CategoryService {
 		System.out.println("say Hello");
 	}
 
-	public Category getCategoryById(Long i) {
-		Optional<Category> categoryOptional = categoryRepository.findById(i);
-		return categoryOptional.orElseThrow(() -> new EntityNotFoundException("Category not found with id: " + i));
+	public Category getCategoryById(Long categoryId) {
+		Optional<Category> categoryOptional = categoryRepository.findById(categoryId);
+		return categoryOptional.orElseThrow(() -> new EntityNotFoundException("Category not found with id: " + categoryId));
 	}
+	
+	public java.util.List<Problem> getProblemsByCategoryId(Long categoryId) {
+		Category category = categoryRepository.findById(categoryId).orElseThrow(() -> new RuntimeException("Category not found with id : " + categoryId));
+		return category.getProblems();
+	}
+	
+	public int countProblems(Long categoryId) {
+		Category category = categoryRepository.findById(categoryId).orElseThrow(() -> new RuntimeException("Category not found with id : " + categoryId));
+		return category.getProblems().size();
+	}
+
 
 	//n個のランダムな問題を返す
 	public java.util.List<Problem> getRandomProblems(Long categoryId, int numberOfProblems) {

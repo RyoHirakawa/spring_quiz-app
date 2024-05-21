@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+
 :root {
 	--header--height: 50px;
 	--footer--height: 50px;
@@ -11,7 +12,9 @@ body, html {
 	padding: 0px;
 }
 
-header {
+
+
+/* header {
 	position: fixed;
 	top: 0;
 	background-color: #333333;
@@ -20,7 +23,7 @@ header {
 	width: 100%;
 	line-height: 50px;
 	font-size: 30px;
-}
+} */
 
 .contents {
 	margin-top: var(--header--height);

@@ -3,6 +3,7 @@ package com.example.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,8 @@ import com.example.model.Problem;
 import com.example.repository.CategoryRepository;
 import com.example.service.CategoryService;
 import com.example.service.ProblemService;
+
+import jakarta.validation.Valid;
 
 
 @Controller
@@ -48,10 +51,6 @@ public class QuizController {
 	public String createProblem(@PathVariable("id") Long categoryId, Model model) {
 		System.out.println(categoryId);
 		categoryService.sayHello();
-//		System.out.println(category);
-//		System.out.println(category.toString());
-		
-//		System.out.println("Hello createProblem");
 		Category category = categoryService.getCategoryById(categoryId);
 		Problem newProblem = new Problem();
 		newProblem.setCategory(category);
@@ -59,7 +58,11 @@ public class QuizController {
 		return "createProblem";
 	}
 	@PostMapping("/saveProblem")
-	public String saveProblem(@ModelAttribute("problem") Problem problem) {		
+	public String saveProblem(@Valid @ModelAttribute("problem") Problem problem, BindingResult bindingResult) {
+		System.out.println(" hasErrors : " + bindingResult.hasErrors());
+		if (bindingResult.hasErrors()) {
+			return "redirect:/category/" + problem.getCategory().getId() + "/createProblem";
+		}
 		problemService.saveProblem(problem);
 		return "redirect:/createCategory";
 	}
@@ -78,8 +81,12 @@ public class QuizController {
 	@GetMapping("/category/{id}/test")
 	public String test(@PathVariable("id") Long categoryId, Model model) {
 		Category category = categoryService.getCategoryById(categoryId);
+		System.out.println("問題数: " + categoryService.countProblems(categoryId));
+		int numberOfProblems = Math.min(10, categoryService.countProblems(categoryId));
+		java.util.List<Problem> problemList = categoryService.getRandomProblems(categoryId, numberOfProblems);
+		System.out.println(problemList.toString());
 		model.addAttribute("category", category);
-		System.out.println(categoryService.getRandomProblems(categoryId, 2));
+		model.addAttribute("problemList", problemList);
 		return "test";
 	}
 }

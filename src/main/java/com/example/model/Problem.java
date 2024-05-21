@@ -9,6 +9,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
 
@@ -19,12 +21,15 @@ public class Problem {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank(message = "問題文を入力してください")
 	private String question;
-		
+	
+	@NotEmpty
 	private java.util.List<String> choices;
 	
 	private int correctChoiceIndex;
 	
+	@NotBlank(message = "解説を入力してください")
 	private String annotation;
 	
 	@ManyToOne
