@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.model.Category;
 import com.example.model.Problem;
@@ -57,6 +58,7 @@ public class QuizController {
 		model.addAttribute("problem", newProblem);		
 		return "createProblem";
 	}
+	
 	@PostMapping("/saveProblem")
 	public String saveProblem(@Valid @ModelAttribute("problem") Problem problem, BindingResult bindingResult) {
 		System.out.println(" hasErrors : " + bindingResult.hasErrors());
@@ -66,6 +68,13 @@ public class QuizController {
 		problemService.saveProblem(problem);
 		return "redirect:/createCategory";
 	}
+	
+	@PostMapping("/deleteProblem")
+	public String deleteProblem(@RequestParam("problemId") Long problemId) {
+		problemService.deleteProblem(problemId);
+		return "redirect:/";
+	}
+	
 	
 	@GetMapping("/category/{id}/problems")
 	public String Problems(@PathVariable("id") Long categoryId ,Model model) {

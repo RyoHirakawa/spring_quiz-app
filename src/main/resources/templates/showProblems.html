@@ -25,6 +25,7 @@
 					<th>正解</th>
 					<th>ダミー選択肢</th>
 					<th>解説</th>
+					<t>アクション</t>
 				</tr>
 			</thead>
 			<tbody>
@@ -39,6 +40,12 @@
 						</ul>
 					</td>
 					<td th:text="${problem.annotation}"></td>
+					<td>
+						<form th:action="@{/deleteProblem}" method="post">
+						    <input type="hidden" name="problemId" th:value="${problem.id}" />
+						    <button class="btn btn-danger" type="submit">削除</button>
+						</form>
+					</td>
 				</tr>
 			</tbody>
 		</table>
