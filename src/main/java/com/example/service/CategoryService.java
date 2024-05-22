@@ -51,13 +51,12 @@ public class CategoryService {
 
 
 	//n個のランダムな問題を返す
-	public java.util.List<Problem> getRandomProblems(Long categoryId, int numberOfProblems) {
-		System.out.println("getRandomProblemが呼び出されました");
+	public java.util.List<Problem> getRandomProblems(Long categoryId, int numberOfProblems) {		
 		Category category = getCategoryById(categoryId);
 		java.util.List<Problem> allProblems = problemRepository.findByCategory(category);
-		System.out.println();
+		Collections.shuffle(allProblems);
 		// 問題が n 個未満の場合は全ての問題を返す
-		if (allProblems.size() <= numberOfProblems) {
+		if (allProblems.size() <= numberOfProblems) {			
 			return allProblems;
 		}
 

@@ -115,7 +115,7 @@ public class QuizController {
 		System.out.println(choicesForProblems.toString());
 		model.addAttribute("category", category);
 		model.addAttribute("problemList", problemList);
-		model.addAttribute("choicesForProblem", choicesForProblems);
+		model.addAttribute("choicesForProblems", choicesForProblems);
 		return "test";
 	}
 }
