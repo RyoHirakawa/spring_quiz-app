@@ -27,12 +27,7 @@
 				<div class="problemIndex primary" th:text="'第' + (${problemStat.index}+1) + '問'"></div>
 				<div class="question" th:text="${problem.question}"></div>
 				<ul class="mt-3 choices">
-<<<<<<< HEAD
-					<li class="mt-1" th:text="'A. ' + ${choicesPerProblem[problemStat.Index][0]}"></li>
-					<li class="mt-1" th:text="'B. ' + ${choicesPerProblem[problemStat.Index][1]}"></li>
-					<li class="mt-1" th:text="'C. ' + ${choicesPerProblem[problemStat.Index][2]}"></li>
-					<li class="mt-1" th:text="'D. ' + ${choicesPerProblem[problemStat.Index][3]}"></li>
-=======
+
 					<li class="mt-1 choice" th:text="'A. ' + ${choicesForProblems[problemStat.index][0]}"
 						th:classappend="${choicesForProblems[problemStat.index][0] == problem.correctChoice} ? ' correct' : ' dummy'">
 					</li>
@@ -45,7 +40,7 @@
 					<li class="mt-1 choice" th:text="'D. ' + ${choicesForProblems[problemStat.index][3]}"
 						th:classappend="${choicesForProblems[problemStat.index][3] == problem.correctChoice} ? ' correct' : ' dummy'">
 					</li>
->>>>>>> testpage
+
 				</ul>
 				<div class="result"></div>
 				<div class="annotation" th:text="${problem.annotation}" style="display: none;"></div>				
