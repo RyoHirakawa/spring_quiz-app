@@ -1,5 +1,9 @@
 package com.example.controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,7 +57,6 @@ public class QuizController {
 	@GetMapping("/category/{id}/createProblem")
 	public String createProblem(@PathVariable("id") Long categoryId, Model model) {
 		System.out.println(categoryId);
-		categoryService.sayHello();
 		Category category = categoryService.getCategoryById(categoryId);
 		Problem newProblem = new Problem();
 		newProblem.setCategory(category);
@@ -68,7 +71,7 @@ public class QuizController {
 			return "redirect:/category/" + problem.getCategory().getId() + "/createProblem";
 		}
 		problemService.saveProblem(problem);
-		return "redirect:/editCategory";
+		return "redirect:/";
 	}
 	
 	@PostMapping("/deleteProblem")
@@ -77,6 +80,11 @@ public class QuizController {
 		return "redirect:/";
 	}
 	
+	@PostMapping("/deleteCategory")
+	public String deleteCategory(@RequestParam("categoryId") Long categoryId) {
+		categoryService.deleteCategory(categoryId);
+		return "redirect:editCategory";
+	}
 	
 	@GetMapping("/category/{id}/problems")
 	public String Problems(@PathVariable("id") Long categoryId ,Model model) {
@@ -91,13 +99,23 @@ public class QuizController {
 	
 	@GetMapping("/category/{id}/test")
 	public String test(@PathVariable("id") Long categoryId, Model model) {
-		Category category = categoryService.getCategoryById(categoryId);
-		System.out.println("問題数: " + categoryService.countProblems(categoryId));
+		Category category = categoryService.getCategoryById(categoryId);		
 		int numberOfProblems = Math.min(10, categoryService.countProblems(categoryId));
 		java.util.List<Problem> problemList = categoryService.getRandomProblems(categoryId, numberOfProblems);
-		System.out.println(problemList.toString());
+		List<List<String>> choicesForProblems = new ArrayList<List<String>>();
+		for (Problem problem : problemList) {
+			List<String> choices = new ArrayList<String>();
+			choices.add(problem.getCorrectChoice());
+			choices.add(problem.getDummyChoice1());
+			choices.add(problem.getDummyChoice2());
+			choices.add(problem.getDummyChoice3());
+			Collections.shuffle(choices);
+			choicesForProblems.add(choices);			
+		}
+		System.out.println(choicesForProblems.toString());
 		model.addAttribute("category", category);
 		model.addAttribute("problemList", problemList);
+		model.addAttribute("choicesForProblem", choicesForProblems);
 		return "test";
 	}
 }

@@ -18,6 +18,7 @@
 		<div class="contents">
 			<h1 th:text="${category.name}"></h1>
 			<a th:href="@{/category/{id}/createProblem(id=${category.id})}">問題を作成</a>
+			<a th:href="@{/category/{id}/test(id=${category.id})}">問題を解く</a>
 			<h2>問題一覧</h2>
 			<table class="table">
 				<thead>
@@ -26,7 +27,7 @@
 						<th>正解</th>
 						<th>ダミー選択肢</th>
 						<th>解説</th>
-						<t>アクション</t>
+						<th>アクション</th>
 					</tr>
 				</thead>
 				<tbody>

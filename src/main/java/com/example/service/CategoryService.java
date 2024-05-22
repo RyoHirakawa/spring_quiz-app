@@ -29,9 +29,9 @@ public class CategoryService {
 	public java.util.List<Category> getAll() {
 		return categoryRepository.findAll();
 	}
-
-	public void sayHello() {
-		System.out.println("say Hello");
+	
+	public void deleteCategory(Long id) {
+		categoryRepository.deleteById(id);
 	}
 
 	public Category getCategoryById(Long categoryId) {

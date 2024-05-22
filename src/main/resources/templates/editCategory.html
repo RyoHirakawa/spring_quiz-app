@@ -40,9 +40,10 @@
 								<td th:text="${category.id}"></td>
 								<td th:text="${category.name}"></td>
 								<td>
-									<a class="btn" th:href="@{/category/{id}/createProblem(id=${category.id})}">問題作成</a>
-									<a class="btn" th:href="@{/category/{id}/problems(id=${category.id})}">問題一覧</a>
-									<a class="btn" th:href="@{/category/{id}/test(id=${category.id})}">テスト</a>
+									<form th:action="@{/deleteCategory}" method="post">
+										<input type="hidden" name="categoryId" th:value="${category.id}" />
+										<button class="btn btn-danger delete-category-btn" type="submit">削除</button>
+									</form>
 								</td>
 							</tr>
 						</tbody>
@@ -55,7 +56,20 @@
 
 
 	<div th:replace="fragments/footer :: footer_fragment"></div>
-
+	
+	<script>
+		document.addEventListener("DOMContentLoaded", () => {
+			const deleteButtons = document.querySelectorAll(".delete-category-btn");
+			deleteButtons.forEach((button) => {
+				button.addEventListener("click", (event) => {
+					const confirmDelete = confirm("本当にカテゴリを削除しますか？関連付けられた問題も削除されます。");
+					if (!confirmDelete) {
+						event.preventDefault();
+					}				
+				});
+			});
+		});
+	</script>
 </body>
 
 </html>
