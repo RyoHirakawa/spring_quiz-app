@@ -14,9 +14,13 @@
 <body>
 	<div th:replace="fragments/header :: header_fragment"></div>
 
-
-	<div class="contents container">
-		
+	<div class="wrapper">
+		<div th:replace="fragments/sidebar :: sidebar_fragment"></div>
+		<div class="container">
+			<div class="contents">
+				//ここに記述
+			</div>
+		</div>
 	</div>
 
 

@@ -13,43 +13,44 @@
 
 <body>
 	<div th:replace="fragments/header :: header_fragment"></div>
-
-
-	<div class="contents container">
-		<h1 th:text="${categoryName} + 'の問題一覧'"></h1>
-
-		<table class="table">
-			<thead>
-				<tr>
-					<th>問題文</th>
-					<th>正解</th>
-					<th>ダミー選択肢</th>
-					<th>解説</th>
-					<t>アクション</t>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="problem : ${problems}">
-					<td th:text="${problem.question}"></td>
-					<td th:text="${problem.choices[0]}"></td>
-					<td>
-						<ul>
-							<li th:text="${problem.choices[1]}"></li>
-							<li th:text="${problem.choices[2]}"></li>
-							<li th:text="${problem.choices[3]}"></li>
-						</ul>
-					</td>
-					<td th:text="${problem.annotation}"></td>
-					<td>
-						<form th:action="@{/deleteProblem}" method="post">
-						    <input type="hidden" name="problemId" th:value="${problem.id}" />
-						    <button class="btn btn-danger" type="submit">削除</button>
-						</form>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+	<div th:replace="fragments/sidebar :: sidebar_fragment"></div>
+	<div class="container-fluid">
+		<div class="contents">
+			<h1 th:text="${categoryName} + 'の問題一覧'"></h1>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>問題文</th>
+						<th>正解</th>
+						<th>ダミー選択肢</th>
+						<th>解説</th>
+						<t>アクション</t>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="problem : ${problems}">
+						<td th:text="${problem.question}"></td>
+						<td th:text="${problem.choices[0]}"></td>
+						<td>
+							<ul>
+								<li th:text="${problem.choices[1]}"></li>
+								<li th:text="${problem.choices[2]}"></li>
+								<li th:text="${problem.choices[3]}"></li>
+							</ul>
+						</td>
+						<td th:text="${problem.annotation}"></td>
+						<td>
+							<form th:action="@{/deleteProblem}" method="post">
+								<input type="hidden" name="problemId" th:value="${problem.id}" />
+								<button class="btn btn-danger" type="submit">削除</button>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
+
 
 
 	<div th:replace="fragments/footer :: footer_fragment"></div>

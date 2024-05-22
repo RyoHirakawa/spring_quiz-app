@@ -7,6 +7,10 @@
 	--color--green: #a4d597;
 }
 
+.wrapper {
+	display: flex;
+}
+
 * {	
 	font-family: "Kiwi Maru", serif;
 	font-weight: 400;
@@ -40,11 +44,58 @@ header {
 	font-size: 30px;
 } */
 
+
+#sidebar {
+	padding-top: 20px;
+	padding-left: 20px;
+	background-color: rgb(179, 179, 219);
+	width: 250px;
+	position: fixed;
+	left: -200px;
+	height: 100%;
+	overflow-y: auto;
+	transition: left 0.3s ease;
+}
+#sidebar.show {
+	left: 0;
+}
+
+#sidebar ul {
+	padding: 0;
+	padding-left: 10px;
+	margin: 0;
+}
+
+#sidebar li {
+	list-style: none;
+}
+#sidebar-toggle {
+	position: absolute;
+	margin-right: 10px;
+	right: 0;
+}
+
+.arrow-icon {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.sidebar.show .arrow-icon {
+    transform: rotate(180deg);
+}
+
 .contents {
 	/* margin-top: var(--header--height); */
-	margin-top: 18px;
 	--contents--min--height: calc(100% - var(--header--height) - var(--footer--height));
 	min-height: var(--contents--min--height);
+	display: block;
+	margin-top: 18px;
+	margin-left: 50px;		
+	transition: margin-left 0.3s ease;	
+}
+
+.contents.sidebar-show {
+	margin-left: 250px;
 }
 
 

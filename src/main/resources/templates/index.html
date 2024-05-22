@@ -13,10 +13,11 @@
 
 <body>
 	<div th:replace="fragments/header :: header_fragment"></div>
-
-
-	<div class="contents container">
-		<a th:href="@{createCategory}">カテゴリ一覧へ</a>		
+	<div th:replace="fragments/sidebar :: sidebar_fragment"></div>
+	<div class="container">
+		<div class="contents">
+			<a th:href="@{createCategory}">カテゴリ一覧へ</a>
+		</div>
 	</div>
 
 

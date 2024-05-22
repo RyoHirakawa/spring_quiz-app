@@ -1,0 +1,38 @@
+.problem {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border-radius: 20px;
+}
+
+.problemIndex {
+    font-size: 30px;
+    font-weight: bold;
+    color: #2792c3;
+}
+
+.question {
+    font-size: 25px;
+}
+
+.choices {
+    list-style-type: none;
+    padding-left: 0;
+    font-size: 20px;
+}
+
+.correct {
+    color: green;
+    font-weight: bold;
+}
+
+.incorrect {
+    color: red;
+    font-weight: bold;
+}
+
+.explanation {
+    display: none;
+    margin-top: 10px;
+}

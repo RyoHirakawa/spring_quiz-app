@@ -1,0 +1,10 @@
+<div id="sidebar" xmlns:th="http://www.thymeleaf.org" th:fragment="sidebar_fragment" class="col-sm-2">    
+    <button id="sidebar-toggle" class="btn">→  
+    </button>
+    <p><strong>カテゴリ一覧</strong></p>
+    <ul>
+        <li th:each="category : ${commonInfo.categories}">
+            <a class="btn" th:href="@{/category/{id}/problems(id=${category.id})}"><span th:text="${category.name}"></span></a>
+        </li>
+    </ul>
+</div>

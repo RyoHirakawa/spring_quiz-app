@@ -13,43 +13,52 @@
 
 <body>
 	<div th:replace="fragments/header :: header_fragment"></div>
-	
-	<div class="contents container">
-		<h1>問題を作成</h1>
-		<form th:action="@{/saveProblem}" th:object="${problem}" method="post">
-			<input type="hidden" th:field="*{id}"/>
-			
-			<p>
-				<label for="question">問題文:</label><br/>
-				<textarea class="form-control" id="question" th:field="*{question}" rows="8" cols="50"></textarea>
-			</p>
-			
-			<p>				
-				<label for="correctChoice">正解の選択肢:</label><br/>
-				<textarea class="form-control" id="correctChoice" type="text" th:field="*{choices[0]}" rows="2" cols="30"></textarea><br/>
-				
-				<label for="wrongChoice1">不正解の選択肢:</label><br/>
-				<textarea class="form-control" id="wrongChoice1" type="text" th:field="*{choices[1]}" placeholder="ダミー選択肢1" rows="2" cols="30"></textarea><br/>
-				<textarea class="form-control" id="wrongChoice2" type="text" th:field="*{choices[2]}" placeholder="ダミー選択肢2" rows="2" cols="30"></textarea><br/>
-				<textarea class="form-control" id="wrongChoice3" type="text" th:field="*{choices[3]}" placeholder="ダミー選択肢3" rows="2" cols="30"></textarea><br/>
-			</p>
-			
-			<p>
-				<label for="annotation">解説:</label><br/>
-				<textarea class="form-control" id="annotation" th:field="*{annotation}" rows="4" cols="50"></textarea>
-			</p>
-			
-			<p>
-				<label for="category">カテゴリ:</label><br/>
-				<input class="form-control" type="hidden" th:field="*{category.id}"/>
-				<input class="form-control" id="category" type="text" th:field="*{category.name}" readonly/>
-			</p>
-			
-			<p>
-				<button class="btn btn-green" type="submit">作成</button>
-			</p>
-		</form>
+	<div th:replace="fragments/sidebar :: sidebar_fragment"></div>
+
+	<div class="container">
+		<div class="contents">
+			<h1>問題を作成</h1>
+			<form th:action="@{/saveProblem}" th:object="${problem}" method="post">
+				<input type="hidden" th:field="*{id}" />
+
+				<p>
+					<label for="question">問題文:</label><br />
+					<textarea class="form-control" id="question" th:field="*{question}" rows="8" cols="50"></textarea>
+				</p>
+
+				<p>
+					<label for="correctChoice">正解の選択肢:</label><br />
+					<textarea class="form-control" id="correctChoice" type="text" th:field="*{choices[0]}" rows="2"
+						cols="30"></textarea><br />
+
+					<label for="wrongChoice1">不正解の選択肢:</label><br />
+					<textarea class="form-control" id="wrongChoice1" type="text" th:field="*{choices[1]}"
+						placeholder="ダミー選択肢1" rows="2" cols="30"></textarea><br />
+					<textarea class="form-control" id="wrongChoice2" type="text" th:field="*{choices[2]}"
+						placeholder="ダミー選択肢2" rows="2" cols="30"></textarea><br />
+					<textarea class="form-control" id="wrongChoice3" type="text" th:field="*{choices[3]}"
+						placeholder="ダミー選択肢3" rows="2" cols="30"></textarea><br />
+				</p>
+
+				<p>
+					<label for="annotation">解説:</label><br />
+					<textarea class="form-control" id="annotation" th:field="*{annotation}" rows="4"
+						cols="50"></textarea>
+				</p>
+
+				<p>
+					<label for="category">カテゴリ:</label><br />
+					<input class="form-control" type="hidden" th:field="*{category.id}" />
+					<input class="form-control" id="category" type="text" th:field="*{category.name}" readonly />
+				</p>
+
+				<p>
+					<button class="btn btn-green" type="submit">作成</button>
+				</p>
+			</form>
+		</div>
 	</div>
+
 
 
 	<div th:replace="fragments/footer :: footer_fragment"></div>
