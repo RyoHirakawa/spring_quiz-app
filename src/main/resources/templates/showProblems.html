@@ -8,21 +8,19 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/css/index.css}" />
 	<script type="text/javascript" th:src="@{/scripts/index.js}"></script>
 
-<!--	sourcetreetest-->
-<!--aaa-->
-<!--test branch-->
 	<head>
 	</head>
 
 <body>
 	<div th:replace="fragments/header :: header_fragment"></div>
 	<div th:replace="fragments/sidebar :: sidebar_fragment"></div>
-	
 	<div class="container-fluid">
 		<div class="contents">
 			<h1 th:text="${category.name}"></h1>
-			<a class="btn btn-outline-dark" th:href="@{/category/{id}/createProblem(id=${category.id})}">問題を作成</a>
-			<a class="btn btn-outline-dark" th:href="@{/category/{id}/test(id=${category.id})}">問題を解く</a>
+			<a th:href="@{/category/{id}/createProblem(id=${category.id})}">問題を作成</a>
+			<h2>問題一覧</h2>
+<!--			main branch-->
+				
 			<table class="table">
 				<thead>
 					<tr>
@@ -30,7 +28,7 @@
 						<th>正解</th>
 						<th>ダミー選択肢</th>
 						<th>解説</th>
-						<th>アクション</th>
+						<t>アクション</t>
 					</tr>
 				</thead>
 				<tbody>
