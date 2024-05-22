@@ -39,7 +39,7 @@ public class Problem {
 	@ManyToOne
 	private com.example.model.Category category;
 	
-	public Problem() {		
+	public Problem() {
 	}
 	
 	public Problem(String question, String correctChoice, String dummyChoice1, String dummyChoice2, String dummyChoice3, int correctChoiceIndex, String annotation,
