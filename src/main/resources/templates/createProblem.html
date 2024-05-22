@@ -28,15 +28,15 @@
 
 				<p>
 					<label for="correctChoice">正解の選択肢:</label><br />
-					<textarea class="form-control" id="correctChoice" type="text" th:field="*{choices[0]}" rows="2"
+					<textarea class="form-control" id="correctChoice" type="text" th:field="*{correctChoice}" rows="2"
 						cols="30"></textarea><br />
 
 					<label for="wrongChoice1">不正解の選択肢:</label><br />
-					<textarea class="form-control" id="wrongChoice1" type="text" th:field="*{choices[1]}"
+					<textarea class="form-control" id="wrongChoice1" type="text" th:field="*{dummyChoice1}"
 						placeholder="ダミー選択肢1" rows="2" cols="30"></textarea><br />
-					<textarea class="form-control" id="wrongChoice2" type="text" th:field="*{choices[2]}"
+					<textarea class="form-control" id="wrongChoice2" type="text" th:field="*{dummyChoice2}"
 						placeholder="ダミー選択肢2" rows="2" cols="30"></textarea><br />
-					<textarea class="form-control" id="wrongChoice3" type="text" th:field="*{choices[3]}"
+					<textarea class="form-control" id="wrongChoice3" type="text" th:field="*{dummyChoice3}"
 						placeholder="ダミー選択肢3" rows="2" cols="30"></textarea><br />
 				</p>
 

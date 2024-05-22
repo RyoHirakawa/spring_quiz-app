@@ -33,16 +33,18 @@
 								<!-- Categoryを反復処理して表示 -->
 								<tr th:each="category : ${categories}">
 									<td th:text="${category.id}"></td>
-									<td th:text="${category.name}"></td>
 									<td>
-										<a class="btn" th:href="@{/category/{id}/createProblem(id=${category.id})}">問題作成</a>
-										<a class="btn" th:href="@{/category/{id}/problems(id=${category.id})}">問題一覧</a>
+										<a class="btn" th:href="@{/category/{id}/problems(id=${category.id})}" th:text="${category.name}">問題一覧</a>
+									</td>
+									<td>
+										<a class="btn" th:href="@{/category/{id}/createProblem(id=${category.id})}">問題作成</a>										
 										<a class="btn" th:href="@{/category/{id}/test(id=${category.id})}">テスト</a>
 									</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
+					<a th:href="@{/editCategory}">カテゴリ編集画面へ（管理者向け）</a>
 				</div>
 			</div>
 	
