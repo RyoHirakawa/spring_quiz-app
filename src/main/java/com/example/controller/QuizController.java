@@ -1,5 +1,10 @@
 package com.example.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -64,6 +69,7 @@ public class QuizController {
 	@PostMapping("/saveProblem")
 	public String saveProblem(@Valid @ModelAttribute("problem") Problem problem, BindingResult bindingResult) {
 		System.out.println(" hasErrors : " + bindingResult.hasErrors());
+		System.out.println(problem.toString());
 		if (bindingResult.hasErrors()) {
 			return "redirect:/category/" + problem.getCategory().getId() + "/createProblem";
 		}
@@ -91,11 +97,17 @@ public class QuizController {
 	
 	@GetMapping("/category/{id}/test")
 	public String test(@PathVariable("id") Long categoryId, Model model) {
-		Category category = categoryService.getCategoryById(categoryId);
-		System.out.println("問題数: " + categoryService.countProblems(categoryId));
+		Category category = categoryService.getCategoryById(categoryId);		
 		int numberOfProblems = Math.min(10, categoryService.countProblems(categoryId));
 		java.util.List<Problem> problemList = categoryService.getRandomProblems(categoryId, numberOfProblems);
-		System.out.println(problemList.toString());
+		
+		List<List<String>> choicesPerProblem = new ArrayList<>();
+		for (Problem problem : problemList) {
+			java.util.ArrayList<String> choice = new ArrayList<>(Arrays.asList(problem.getCorrectChoice(), problem.getDummyChoice1(), problem.getDummyChoice2(), problem.getDummyChoice3()));
+			Collections.shuffle(choice);
+			choicesPerProblem.add(choice);
+		}
+		model.addAttribute("choicesPerProblem", choicesPerProblem);
 		model.addAttribute("category", category);
 		model.addAttribute("problemList", problemList);
 		return "test";
