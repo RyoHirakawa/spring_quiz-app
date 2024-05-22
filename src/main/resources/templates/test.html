@@ -23,12 +23,12 @@
 			<h1 th:text="${category.name} + 'から出題です'"></h1>
 
 			<div th:each="problem, problemStat : ${problemList}" class="problem card">
-				<div class="problemIndex primary" th:text="'第' + ${problemStat.index} + '問'"></div>
+				<div class="problemIndex primary" th:text="'第' + (${problemStat.index}+1) + '問'"></div>
 				<div class="question" th:text="${problem.question}"></div>
 				<ul class="mt-3 choices">
 					<!-- Loop through the choices and display each one -->
 					<li class="mt-1" th:each="choice, choiceStat : ${problem.choices}"
-						th:text="${choiceStat.index} + '. ' + ${choice}" th:data-index="${choiceStat.index}"></li>
+						th:text="(${choiceStat.index}+1) + '. ' + ${choice}" th:data-index="${choiceStat.index}"></li>
 				</ul>
 				<div class="explanation" th:text="${problem.annotation}"></div>
 			</div>

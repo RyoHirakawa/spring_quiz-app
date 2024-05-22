@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const contents = document.querySelector(".contents");
     toggleBtn.addEventListener("click", () => {        
         sidebar.classList.toggle('show');        
-        toggleBtn.innerHTML = sidebar.classList.contains('show') ? '←' : '→';
+        toggleBtn.innerHTML = sidebar.classList.contains('show') ? '<' : '>';
         if (sidebar.classList.contains('show')) {            
             contents.classList.add("sidebar-show");
         } else {

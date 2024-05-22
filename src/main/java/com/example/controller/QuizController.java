@@ -31,21 +31,23 @@ public class QuizController {
 	CategoryRepository categoryRepository;
 	
 	@GetMapping("/")
-	public String home() {
+	public String home(Model model) {
+		model.addAttribute("category", new Category());
+		model.addAttribute("categories", categoryService.getAll());
 		return "index";
 	}
 	
-	@GetMapping("/createCategory")
-	public String createCategory(Model model) {
+	@GetMapping("/editCategory")
+	public String editCategory(Model model) {
 		model.addAttribute("category", new Category());
 		model.addAttribute("categories", categoryService.getAll());
-		return "createCategory";
+		return "editCategory";
 	}
 	
 	@PostMapping("/saveCategory")
 	public String postMethodName(@ModelAttribute("category") Category category) {
 		categoryService.save(category);
-		return "redirect:/createCategory";
+		return "redirect:/editCategory";
 	}
 	
 	@GetMapping("/category/{id}/createProblem")
@@ -66,7 +68,7 @@ public class QuizController {
 			return "redirect:/category/" + problem.getCategory().getId() + "/createProblem";
 		}
 		problemService.saveProblem(problem);
-		return "redirect:/createCategory";
+		return "redirect:/editCategory";
 	}
 	
 	@PostMapping("/deleteProblem")
