@@ -1,10 +1,6 @@
 package com.example.controller;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
-import java.util.Arrays;
-=======
->>>>>>> testpage
 import java.util.Collections;
 import java.util.List;
 
@@ -107,16 +103,7 @@ public class QuizController {
 		Category category = categoryService.getCategoryById(categoryId);		
 		int numberOfProblems = Math.min(10, categoryService.countProblems(categoryId));
 		java.util.List<Problem> problemList = categoryService.getRandomProblems(categoryId, numberOfProblems);
-<<<<<<< HEAD
-		
-		List<List<String>> choicesPerProblem = new ArrayList<>();
-		for (Problem problem : problemList) {
-			java.util.ArrayList<String> choice = new ArrayList<>(Arrays.asList(problem.getCorrectChoice(), problem.getDummyChoice1(), problem.getDummyChoice2(), problem.getDummyChoice3()));
-			Collections.shuffle(choice);
-			choicesPerProblem.add(choice);
-		}
-		model.addAttribute("choicesPerProblem", choicesPerProblem);
-=======
+
 		List<List<String>> choicesForProblems = new ArrayList<List<String>>();
 		for (Problem problem : problemList) {
 			List<String> choices = new ArrayList<String>();
@@ -126,9 +113,8 @@ public class QuizController {
 			choices.add(problem.getDummyChoice3());
 			Collections.shuffle(choices);
 			choicesForProblems.add(choices);			
-		}
-		System.out.println(choicesForProblems.toString());
->>>>>>> testpage
+		}		
+
 		model.addAttribute("category", category);
 		model.addAttribute("problemList", problemList);
 		model.addAttribute("choicesForProblems", choicesForProblems);
