@@ -14,12 +14,12 @@
 <body>
 	<div th:replace="fragments/header :: header_fragment"></div>
 	<div th:replace="fragments/sidebar :: sidebar_fragment"></div>
+	
 	<div class="container-fluid">
 		<div class="contents">
 			<h1 th:text="${category.name}"></h1>
-			<a th:href="@{/category/{id}/createProblem(id=${category.id})}">問題を作成</a>
-			<a th:href="@{/category/{id}/test(id=${category.id})}">問題を解く</a>
-			<h2>問題一覧</h2>
+			<a class="btn btn-outline-dark" th:href="@{/category/{id}/createProblem(id=${category.id})}">問題を作成</a>
+			<a class="btn btn-outline-dark" th:href="@{/category/{id}/test(id=${category.id})}">問題を解く</a>
 			<table class="table">
 				<thead>
 					<tr>
