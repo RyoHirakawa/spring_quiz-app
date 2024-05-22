@@ -84,7 +84,7 @@ public class QuizController {
 		Category category = categoryService.getCategoryById(categoryId);
 		java.util.List<Problem> problems = problemService.getProblemsByCategory(category);
 		
-		model.addAttribute("categoryName", category.getName());
+		model.addAttribute("category", category);
 		model.addAttribute("problems", problems);
 		return "showProblems";
 	}

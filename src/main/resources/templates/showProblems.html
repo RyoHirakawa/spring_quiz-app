@@ -16,7 +16,9 @@
 	<div th:replace="fragments/sidebar :: sidebar_fragment"></div>
 	<div class="container-fluid">
 		<div class="contents">
-			<h1 th:text="${categoryName} + 'の問題一覧'"></h1>
+			<h1 th:text="${category.name}"></h1>
+			<a th:href="@{/category/{id}/createProblem(id=${category.id})}">問題を作成</a>
+			<h2>問題一覧</h2>
 			<table class="table">
 				<thead>
 					<tr>
