@@ -1,35 +1,26 @@
-.problem {
+.problem-card {
     border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 20px;
-    margin-top: 20px;
+    padding: 20px;     
+    margin-bottom: 25px;
+    margin-top: 25px;
     border-radius: 20px;
 }
 
 .problemIndex {
-    font-size: 30px;
+    font-size: 28px;
     font-weight: bold;
     /* color: #2792c3; */
 }
 
 .question {
-    font-size: 25px;
+	margin-top: 8px;
+    font-size: 20px;
 }
 
 .choices {
     list-style-type: none;
     padding-left: 0;
-    font-size: 20px;
-}
-
-.correct {
-    color: green;
-    font-weight: bold;
-}
-
-.incorrect {
-    color: red;
-    font-weight: bold;
+    font-size: 18px;
 }
 
 .explanation {

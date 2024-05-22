@@ -1,7 +1,10 @@
 package com.example.controller;
 
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.Arrays;
+=======
+>>>>>>> testpage
 import java.util.Collections;
 import java.util.List;
 
@@ -58,7 +61,6 @@ public class QuizController {
 	@GetMapping("/category/{id}/createProblem")
 	public String createProblem(@PathVariable("id") Long categoryId, Model model) {
 		System.out.println(categoryId);
-		categoryService.sayHello();
 		Category category = categoryService.getCategoryById(categoryId);
 		Problem newProblem = new Problem();
 		newProblem.setCategory(category);
@@ -74,7 +76,7 @@ public class QuizController {
 			return "redirect:/category/" + problem.getCategory().getId() + "/createProblem";
 		}
 		problemService.saveProblem(problem);
-		return "redirect:/editCategory";
+		return "redirect:/";
 	}
 	
 	@PostMapping("/deleteProblem")
@@ -83,6 +85,11 @@ public class QuizController {
 		return "redirect:/";
 	}
 	
+	@PostMapping("/deleteCategory")
+	public String deleteCategory(@RequestParam("categoryId") Long categoryId) {
+		categoryService.deleteCategory(categoryId);
+		return "redirect:editCategory";
+	}
 	
 	@GetMapping("/category/{id}/problems")
 	public String Problems(@PathVariable("id") Long categoryId ,Model model) {
@@ -100,6 +107,7 @@ public class QuizController {
 		Category category = categoryService.getCategoryById(categoryId);		
 		int numberOfProblems = Math.min(10, categoryService.countProblems(categoryId));
 		java.util.List<Problem> problemList = categoryService.getRandomProblems(categoryId, numberOfProblems);
+<<<<<<< HEAD
 		
 		List<List<String>> choicesPerProblem = new ArrayList<>();
 		for (Problem problem : problemList) {
@@ -108,8 +116,22 @@ public class QuizController {
 			choicesPerProblem.add(choice);
 		}
 		model.addAttribute("choicesPerProblem", choicesPerProblem);
+=======
+		List<List<String>> choicesForProblems = new ArrayList<List<String>>();
+		for (Problem problem : problemList) {
+			List<String> choices = new ArrayList<String>();
+			choices.add(problem.getCorrectChoice());
+			choices.add(problem.getDummyChoice1());
+			choices.add(problem.getDummyChoice2());
+			choices.add(problem.getDummyChoice3());
+			Collections.shuffle(choices);
+			choicesForProblems.add(choices);			
+		}
+		System.out.println(choicesForProblems.toString());
+>>>>>>> testpage
 		model.addAttribute("category", category);
 		model.addAttribute("problemList", problemList);
+		model.addAttribute("choicesForProblems", choicesForProblems);
 		return "test";
 	}
 }

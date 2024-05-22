@@ -27,6 +27,7 @@ html {
 
 header {
 	background-color: 	#a4d597;	
+	position: fixed;
 }
 
 .btn-green {
